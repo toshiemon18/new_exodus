@@ -10,9 +10,7 @@ require './gui/seat_table'
 require './gui/exit_button'
 
 module Exodus
-
 	class GeneralGUI
-
 		def initialize
 			@ui_box = Gtk::VBox.new(false, 10)
 		end
@@ -40,7 +38,5 @@ module Exodus
 			top_line_layout.pack_end(priority_bad_eyesighter_entry, false, false, 10)
 			@ui_box.pack_end(top_line_layout, true, false)
 		end
-
 	end
-
 end

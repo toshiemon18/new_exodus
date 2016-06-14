@@ -11,26 +11,24 @@ require './lib/new_seat_generator'
 require './gui/exit_button'
 
 module Exodus
-
 	class SeatTable
-
 		def initialize(width, height, target_name)
-			@width_ = width
-			@height_ = height
-			@target_name_ = target_name
+			@width = width
+			@height = height
+			@target_name = target_name
 		end
 
 		def attach_some_entries
-			seat_table = Gtk::Table.new(@width_, @height_, true)
+			seat_table = Gtk::Table.new(@width, @height, true)
       generator = Exodus::NewSeatGenerator.new
-			entry_object_array = generator.generate(Time::now.nsec, @target_name_)
+			entry_object_array = generator.generate(Time::now.nsec, @target_name)
       generator.save_new_seat(generator.name_array)
 			w = 0
 			h = 0
 			entry_object_array.each do |entry|
 				seat_table.attach(entry, w, w+1, h, h+1, xop = Gtk::FILL|Gtk::EXPAND, yop = Gtk::FILL|Gtk::EXPAND, 5, 5)
 				w += 1
-				if w >= @width_ then
+				if w >= @width then
 					h += 1
 					w = 0
 				end
@@ -66,7 +64,5 @@ module Exodus
 			win = assemble_sub_window_layout
 			win.show_all
 		end
-
 	end
-
 end
