@@ -13,13 +13,12 @@ require 'gtk2'
 $:.unshift File.dirname(__FILE__)
 
 module Exodus
-
 	class NewSeatGenerator
-
+    attr_accessor :name_array
 		def load_students_name
 			students = []
       begin
-			  File.open("./bin/student_list.txt", encoding: "utf-8").read.each_line { |line| students << line.to_s unless line.empty? }
+			  File.open("./bin/student_list", encoding: "utf-8").read.each_line { |line| students << line.to_s unless line.empty? }
       rescue => e
         puts "#{e} : Please prepare students list in bin/"
       end
@@ -32,13 +31,19 @@ module Exodus
 			return name_array
 		end
 
+    def save_new_seat(new_seat)
+      file = File.open("./bin/student_list", "w") do |line|
+        new_seat.each { |e| line.puts e }
+      end
+    end
+
 		# Array#shuffle!(random: rng)を使う
 		def generate(hhmmss, bad_eyesighter_names)
-			name_array = removal_bad_eyesight(load_students_name, bad_eyesighter_names)
-			name_array.shuffle!(random: Random.new(hhmmss.to_i))
+      self.name_array = removal_bad_eyesight(load_students_name, bad_eyesighter_names)
+      self.name_array.shuffle!(random: Random.new(hhmmss.to_i))
 			# name_array = load_students_name.shuffle!(random: Random.new(hhmmss.to_i))
 			entry_object_array = []
-			name_array.each do |name|
+      self.name_array.each do |name|
 				entry = Gtk::Entry.new
 				entry.set_text("            " + name.to_s)
 				entry.set_editable(false)

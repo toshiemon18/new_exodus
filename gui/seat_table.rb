@@ -1,6 +1,6 @@
-# 
+#
 # Exodus::SeatTable
-# 
+#
 
 # 席の位置と苗字のデータを持ったテキストエントリをGtk::Tableに格納する
 
@@ -22,13 +22,15 @@ module Exodus
 
 		def attach_some_entries
 			seat_table = Gtk::Table.new(@width_, @height_, true)
-			entry_object_array = Exodus::NewSeatGenerator.new.generate(Time::now.nsec, @target_name_)
-			w = 0 
+      generator = Exodus::NewSeatGenerator.new
+			entry_object_array = generator.generate(Time::now.nsec, @target_name_)
+      generator.save_new_seat(generator.name_array)
+			w = 0
 			h = 0
 			entry_object_array.each do |entry|
 				seat_table.attach(entry, w, w+1, h, h+1, xop = Gtk::FILL|Gtk::EXPAND, yop = Gtk::FILL|Gtk::EXPAND, 5, 5)
 				w += 1
-				if w >= @width_ then 
+				if w >= @width_ then
 					h += 1
 					w = 0
 				end
