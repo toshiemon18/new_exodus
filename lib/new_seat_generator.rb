@@ -18,8 +18,12 @@ module Exodus
 
 		def load_students_name
 			students = []
-			File.open("./bin/student_info.txt", encoding: "utf-8").read.each_line { |line| students << line.to_s unless line.empty? }
-			return students
+      begin
+			  File.open("./bin/student_list.txt", encoding: "utf-8").read.each_line { |line| students << line.to_s unless line.empty? }
+      rescue => e
+        puts "#{e} : Please prepare students list in bin/"
+      end
+      return students
 		end
 
 		# 黒板が見えなくて前の席を確保したい人のための機能
@@ -40,10 +44,8 @@ module Exodus
 				entry.set_editable(false)
 				entry_object_array << entry
 			end
-			
+
 			return entry_object_array
 		end
-
 	end
-
 end
