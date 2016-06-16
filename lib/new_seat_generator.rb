@@ -40,7 +40,7 @@ module Exodus
 		# Array#shuffle!(random: rng)を使う
 		def generate(hhmmss, bad_eyesighter_names)
       self.name_array = removal_bad_eyesight(load_students_name, bad_eyesighter_names)
-      self.name_array.shuffle!(random: Random.new(hhmmss.to_i))
+      self.name_array.shuffle!#(random: Random.new(hhmmss.to_i))
 			# name_array = load_students_name.shuffle!(random: Random.new(hhmmss.to_i))
 			entry_object_array = []
       self.name_array.each do |name|

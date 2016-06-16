@@ -23,7 +23,7 @@ module Exodus
 
 			start_button = Gtk::Button.new("Exodus Start")
 			start_button.signal_connect("clicked") do
-				seat_table = Exodus::SeatTable.new(6, 6, priority_bad_eyesighter_entry.text.split(","))
+				seat_table = Exodus::SeatTable.new(5, 6, priority_bad_eyesighter_entry.text.split(","))
 				seat_table.show_sub_window
 			end
 

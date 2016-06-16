@@ -22,7 +22,7 @@ module Exodus
 			seat_table = Gtk::Table.new(@width, @height, true)
       generator = Exodus::NewSeatGenerator.new
 			entry_object_array = generator.generate(Time::now.nsec, @target_name)
-      generator.save_new_seat(generator.name_array)
+      generator.save_new_seat(generator.name_array.shuffle!)
 			w = 0
 			h = 0
 			entry_object_array.each do |entry|
